@@ -3,13 +3,16 @@ const cors = require('cors')
 const morgan = require('morgan')
 require('dotenv').config()
 
+const proxy = require('./proxy')
 
 const app = express()
 
 // middleware
-app.use(morgan('common'))
+app.use(morgan('dev'))
 app.use(cors())
 
+// Handles beyonic requests
+app.use(proxy)
 
 const port = 3000
 
@@ -17,8 +20,6 @@ const port = 3000
 app.get('/', (req, res) => {
     res.send('Hello')
 })
-
-
 
 
 app.listen(port, () => {
